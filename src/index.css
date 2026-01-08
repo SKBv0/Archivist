@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background text-zinc-200;
+  overflow: hidden;
+  user-select: none;
+}
+
+.titlebar-drag-region {
+  -webkit-app-region: drag;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+button,
+input,
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-700/50 hover:bg-zinc-600;
+  border-radius: 3px;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+
+
+.mesh-bg {
+  background-color: #000000;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(var(--gradient-left, 260, 20%, 4%), 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(var(--gradient-center, 252, 40%, 10%), 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(var(--gradient-right, 280, 40%, 8%), 1) 0, transparent 50%);
+}
