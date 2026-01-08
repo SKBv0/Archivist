@@ -1,8 +1,15 @@
 # Archivist
 
-A desktop application for managing AI-generated images from Stable Diffusion, ComfyUI, Midjourney, and other tools. Built with Electron + React, all data stays local on your machine.
+A desktop application for managing AI-generated images from Stable Diffusion, ComfyUI, Midjourney, and other tools. Built with Electron + React, all data stays local on your machine. 
 
 For detailed usage instructions and features, please refer to the [User Guide](DOCS.md).
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/44c5d966-aa55-4060-bbc3-03d31ebf38b1" width="190" />
+  <img src="https://github.com/user-attachments/assets/866d5381-5004-4177-b7b4-310efce10eb3" width="190" />
+  <img src="https://github.com/user-attachments/assets/76ce4319-c8a2-4bda-acc8-9c4923d936e3" width="190" />
+  <img src="https://github.com/user-attachments/assets/8229387d-5d0d-4da5-9dc8-2cceca77a5d2" width="190" />
+  <img src="https://github.com/user-attachments/assets/3792d7fa-6415-41db-bd00-b66beeaac4dd" width="190" />
+</p>
 
 ## Features
 
@@ -15,9 +22,6 @@ For detailed usage instructions and features, please refer to the [User Guide](D
 - **Batch Operations**: Rename, caption, move, or export multiple images at once
 - **Two View Modes**: Gallery grid view and Dataset table view for different workflows
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
 
 ### Setup
 
