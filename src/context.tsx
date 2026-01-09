@@ -289,8 +289,31 @@ export const AppProvider = ({ children }: PropsWithChildren<{}>) => {
 
                     const { updates, hasChanges: enriched } = await enrichImageMetadata(img);
                     if (Object.keys(updates).length > 0) {
-                        await db.images.update(img.id, updates);
-                        if (enriched) hasChanges = true;
+                        // Don't overwrite user-editable fields if they already have meaningful values in DB
+                        const dbRecord = await db.images.get(img.id);
+                        if (dbRecord) {
+                            // Protect prompt if user has edited it (non-empty and different from enrichment source)
+                            if (dbRecord.prompt && dbRecord.prompt.trim() !== '' && updates.prompt) {
+                                delete updates.prompt;
+                            }
+                            // Protect negative prompt
+                            if (dbRecord.negativePrompt && dbRecord.negativePrompt.trim() !== '' && updates.negativePrompt) {
+                                delete updates.negativePrompt;
+                            }
+                            // Protect tags if user has added any
+                            if (dbRecord.tags && dbRecord.tags.length > 0 && updates.tags) {
+                                delete updates.tags;
+                            }
+                            // Protect rating if user has set one
+                            if (dbRecord.rating && dbRecord.rating > 0 && updates.rating) {
+                                delete updates.rating;
+                            }
+                        }
+
+                        if (Object.keys(updates).length > 0) {
+                            await db.images.update(img.id, updates);
+                            if (enriched) hasChanges = true;
+                        }
                     }
                 } catch (err: any) {
                     const isModifyError =

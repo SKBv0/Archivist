@@ -40,9 +40,32 @@ const EditorPanel: React.FC<EditorPanelProps> = memo(({
     const [isTagInputActive, setIsTagInputActive] = useState(false);
 
     useEffect(() => {
-        setLocalState(image);
-        setIsTagInputActive(false);
-        setTagInput("");
+        // Only reset localState when navigating to a DIFFERENT image
+        // This prevents losing user edits when refreshImages() updates the same image
+        setLocalState(prev => {
+            if (prev.id !== image.id) {
+                // Different image - reset everything
+                setIsTagInputActive(false);
+                setTagInput("");
+                return image;
+            }
+            // Same image - merge: keep user-editable fields, sync system fields
+            // User-editable fields to preserve: prompt, negativePrompt, tags, rating, title
+            // System fields to sync: dominantColors, width, height, src, hash, etc.
+            return {
+                ...image, // Start with fresh data from DB
+                // Preserve user-editable fields from localState
+                prompt: prev.prompt,
+                negativePrompt: prev.negativePrompt,
+                tags: prev.tags,
+                rating: prev.rating,
+                title: prev.title,
+                model: prev.model,
+                sampler: prev.sampler,
+                cfgScale: prev.cfgScale,
+                steps: prev.steps,
+            };
+        });
     }, [image]);
 
     const handleChange = (field: keyof AIImage, value: AIImage[keyof AIImage]) => {

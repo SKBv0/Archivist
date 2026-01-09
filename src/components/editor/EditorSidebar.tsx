@@ -216,10 +216,22 @@ const EditorSidebar: FC<EditorSidebarProps> = ({
                                 <Hash size={12} className="text-zinc-500" />
                                 <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-400">Tags</label>
                             </div>
-                            <button onClick={handleAutoTag} disabled={isAnalyzingTags} className="flex items-center gap-1.5 text-[9px] text-accent hover:text-accent-hover font-bold bg-accent/10 px-2 py-1 rounded-md transition-all hover:bg-accent/20 disabled:opacity-50 disabled:cursor-wait">
-                                {isAnalyzingTags ? <Loader2 size={10} className="animate-spin" /> : <Sparkles size={10} />}
-                                {isAnalyzingTags ? 'EXTRACTING...' : 'EXTRACT TAGS'}
-                            </button>
+                            <div className="flex items-center gap-2">
+                                {(localState.tags || []).length > 0 && (
+                                    <button
+                                        onClick={() => handleChange('tags', [])}
+                                        className="flex items-center gap-1 text-[9px] text-zinc-500 hover:text-red-400 font-medium px-1.5 py-0.5 rounded transition-colors hover:bg-red-500/10"
+                                        title="Clear all tags"
+                                    >
+                                        <X size={10} />
+                                        CLEAR
+                                    </button>
+                                )}
+                                <button onClick={handleAutoTag} disabled={isAnalyzingTags} className="flex items-center gap-1.5 text-[9px] text-accent hover:text-accent-hover font-bold bg-accent/10 px-2 py-1 rounded-md transition-all hover:bg-accent/20 disabled:opacity-50 disabled:cursor-wait">
+                                    {isAnalyzingTags ? <Loader2 size={10} className="animate-spin" /> : <Sparkles size={10} />}
+                                    {isAnalyzingTags ? 'EXTRACTING...' : 'EXTRACT TAGS'}
+                                </button>
+                            </div>
                         </div>
 
                         <div className={`flex flex-wrap gap-2 p-2 rounded-xl border transition-all duration-300 ${isTagInputActive ? 'bg-background border-accent ring-1 ring-accent/30' : 'bg-background/50 border-white/5'}`} onClick={() => setIsTagInputActive(true)}>
