@@ -495,6 +495,16 @@ export const AppProvider = ({ children }: PropsWithChildren<{}>) => {
             {
                 title: newImage.title,
                 prompt: newImage.prompt,
+                negativePrompt: newImage.negativePrompt,
+                model: newImage.model,
+                sampler: newImage.sampler,
+                cfgScale: newImage.cfgScale,
+                steps: newImage.steps,
+                seed: newImage.seed,
+                width: newImage.width,
+                height: newImage.height,
+                rating: newImage.rating,
+                tags: newImage.tags,
                 blob: newImage.blob,
                 dataUrl: newImage.src.startsWith('data:') ? newImage.src : undefined
             },
