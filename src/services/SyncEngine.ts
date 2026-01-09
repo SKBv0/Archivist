@@ -215,6 +215,16 @@ export async function saveNewImage(
     imageData: {
         title: string;
         prompt?: string;
+        negativePrompt?: string;
+        model?: string;
+        sampler?: string;
+        cfgScale?: number;
+        steps?: number;
+        seed?: number;
+        width?: number;
+        height?: number;
+        rating?: number;
+        tags?: string[];
         blob?: Blob;
         dataUrl?: string;
     },
@@ -323,6 +333,16 @@ export async function saveNewImage(
                     id,
                     title: imageData.title || safeTitle,
                     prompt: imageData.prompt || '',
+                    negativePrompt: imageData.negativePrompt,
+                    model: imageData.model,
+                    sampler: imageData.sampler,
+                    cfgScale: imageData.cfgScale,
+                    steps: imageData.steps,
+                    seed: imageData.seed,
+                    width: imageData.width,
+                    height: imageData.height,
+                    rating: imageData.rating,
+                    tags: imageData.tags,
                     src,
                     sourceId: 'internal',
                     date: new Date().toISOString()
@@ -335,6 +355,16 @@ export async function saveNewImage(
                 id,
                 title: imageData.title || safeTitle,
                 prompt: imageData.prompt || '',
+                negativePrompt: imageData.negativePrompt,
+                model: imageData.model,
+                sampler: imageData.sampler,
+                cfgScale: imageData.cfgScale,
+                steps: imageData.steps,
+                seed: imageData.seed,
+                width: imageData.width,
+                height: imageData.height,
+                rating: imageData.rating,
+                tags: imageData.tags,
                 src,
                 sourceId: 'internal',
                 date: new Date().toISOString()
